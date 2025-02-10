@@ -37,4 +37,4 @@ p.disconnect()
 
 numpy.save('data/backLegSensorValues.npy', backLegSensorValues)
 numpy.save('data/frontLegSensorValues.npy', frontLegSensorValues)
-print(backLegSensorValues)
+#print(backLegSensorValues)
