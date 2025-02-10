@@ -32,5 +32,5 @@ for x in range(SIM_STEPS):
     #print(x)
 p.disconnect()
 
-numpy.save('data\output.npy', backLegSensorValues)
+numpy.save('data/backLegSensorValues.npy', backLegSensorValues)
 print(backLegSensorValues)
