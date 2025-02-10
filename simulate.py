@@ -19,6 +19,8 @@ for x in range(100000):
 
     backLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
 
+    print(backLegTouch)
+
     t.sleep(1/60)
-    print(x)
+    #print(x)
 p.disconnect()
