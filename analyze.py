@@ -3,8 +3,14 @@ import matplotlib.pyplot
 
 backLegSensorValues = numpy.load('data/backLegSensorValues.npy')
 
-print(backLegSensorValues)
+#print(backLegSensorValues)
 
 matplotlib.pyplot.plot(backLegSensorValues)
+
+frontLegSensorValues = numpy.load('data/frontLegSensorValues.npy')
+
+#print(backLegSensorValues)
+
+matplotlib.pyplot.plot(frontLegSensorValues)
 
 matplotlib.pyplot.show()
