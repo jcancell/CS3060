@@ -2,7 +2,8 @@ import pybullet_data
 import pybullet as p
 import time as t
 import pyrosim.pyrosim as pyrosim
-import numpy
+import numpy as np
+import random as rd
 
 SIM_STEPS = 1000
 
@@ -17,8 +18,8 @@ p.loadSDF("world.sdf")
 
 pyrosim.Prepare_To_Simulate(robotId)
 
-backLegSensorValues = numpy.zeros(SIM_STEPS)
-frontLegSensorValues = numpy.zeros(SIM_STEPS)
+backLegSensorValues = np.zeros(SIM_STEPS)
+frontLegSensorValues = np.zeros(SIM_STEPS)
 
 for x in range(SIM_STEPS):
     p.stepSimulation()
@@ -36,21 +37,21 @@ for x in range(SIM_STEPS):
         bodyIndex = robotId,
         jointName = b'Torso_BackLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = -numpy.pi/4.0,
-        maxForce = 500)
+        targetPosition = (rd.uniform(-np.pi/2, np.pi/2)),
+        maxForce = 50)
     
     # Front Leg Motor
     pyrosim.Set_Motor_For_Joint(
         bodyIndex = robotId,
         jointName = b'Torso_FrontLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = numpy.pi/4.0,
-        maxForce = 500)
+        targetPosition = (rd.uniform(-np.pi/2, np.pi/2)),
+        maxForce = 50)
 
     t.sleep(1/60)
     #print(x)
 p.disconnect()
 
-numpy.save('data/backLegSensorValues.npy', backLegSensorValues)
-numpy.save('data/frontLegSensorValues.npy', frontLegSensorValues)
+np.save('data/backLegSensorValues.npy', backLegSensorValues)
+np.save('data/frontLegSensorValues.npy', frontLegSensorValues)
 #print(backLegSensorValues)
