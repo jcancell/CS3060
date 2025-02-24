@@ -1,3 +1,5 @@
+from simulation import SIMULATION
+'''
 import pybullet_data
 import pybullet as p
 import time as t
@@ -83,3 +85,5 @@ np.save('data/frontLegSensorValues.npy', frontLegSensorValues)
 np.save('data/backLegMotorValues.npy', backLegMotorValues)
 np.save('data/frontLegMotorValues', frontLegMotorValues)
 #print(backLegSensorValues)
+'''
+pass
