@@ -4,18 +4,19 @@ import time as t
 import pyrosim.pyrosim as pyrosim
 import numpy as np
 import random as rd
+import constraints as c
 
-SIM_STEPS = 1000
+SIM_STEPS = c.SIM_STEPS
 # num seconds between loop iterations
-SIM_SPEED = 1/240
+SIM_SPEED = c.SIM_SPEED
 
-frontLeg_amplitude = np.pi/3
-frontLeg_frequency = 10
-frontLeg_phaseOffset = 0
+frontLeg_amplitude = c.frontLeg_amplitude
+frontLeg_frequency = c.frontLeg_frequency
+frontLeg_phaseOffset = c.frontLeg_phaseOffset
 
-backLeg_amplitude = np.pi/6
-backLeg_frequency = 5
-backLeg_phaseOffset = 0.5
+backLeg_amplitude = c.backLeg_amplitude
+backLeg_frequency = c.backLeg_frequency
+backLeg_phaseOffset = c.backLeg_phaseOffset
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
