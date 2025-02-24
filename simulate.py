@@ -20,8 +20,6 @@ backLeg_amplitude = c.backLeg_amplitude
 backLeg_frequency = c.backLeg_frequency
 backLeg_phaseOffset = c.backLeg_phaseOffset
 
-backLegSensorValues = np.zeros(SIM_STEPS)
-frontLegSensorValues = np.zeros(SIM_STEPS)
 backLegMotorValues = np.zeros(SIM_STEPS)
 frontLegMotorValues = np.zeros(SIM_STEPS)
 

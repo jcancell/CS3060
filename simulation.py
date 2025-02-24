@@ -1,7 +1,5 @@
 from world import WORLD
 from robot import ROBOT
-from sensor import SENSOR
-from motor import MOTOR
 import constraints as c
 
 import pybullet_data
@@ -17,10 +15,9 @@ class SIMULATION:
         
         self.world = WORLD()
         self.robot = ROBOT()
-        self.sensors = {}
-        self.motors = {}
         
         pyrosim.Prepare_To_Simulate(self.robot.robotId)
+        self.robot.Prepare_To_Sense()
 
     def __del__(self):
 
@@ -31,11 +28,9 @@ class SIMULATION:
             #print(x)
             
             p.stepSimulation()
+            self.robot.Sense(x)
+            
             '''
-            backLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-
-            frontLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
-
             # Back Leg Motor
             pyrosim.Set_Motor_For_Joint(
                 bodyIndex = simulation.robot.robotId,
