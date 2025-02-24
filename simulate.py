@@ -8,8 +8,6 @@ import numpy as np
 import random as rd
 import constraints as c
 
-simulation = SIMULATION()
-
 SIM_STEPS = c.SIM_STEPS
 # num seconds between loop iterations
 SIM_SPEED = c.SIM_SPEED
@@ -33,35 +31,8 @@ backLeg_targetAngles = [backLeg_amplitude * np.sin(backLeg_frequency * x + backL
 
 frontLeg_targetAngles = [frontLeg_amplitude * np.sin(frontLeg_frequency * x + frontLeg_phaseOffset)for x in vals]
 
-for x in range(SIM_STEPS):
-    p.stepSimulation()
-
-    backLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-
-    frontLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
-
-    # Back Leg Motor
-    pyrosim.Set_Motor_For_Joint(
-        bodyIndex = simulation.robot.robotId,
-        jointName = b'Torso_BackLeg',
-        controlMode = p.POSITION_CONTROL,
-        targetPosition = backLeg_targetAngles[x],
-        maxForce = 50)
-    
-    backLegMotorValues[x] = backLeg_targetAngles[x]
-
-    # Front Leg Motor
-    pyrosim.Set_Motor_For_Joint(
-        bodyIndex = simulation.robot.robotId,
-        jointName = b'Torso_FrontLeg',
-        controlMode = p.POSITION_CONTROL,
-        targetPosition = frontLeg_targetAngles[x],
-        maxForce = 50)
-    
-    frontLegMotorValues[x] = frontLeg_targetAngles[x]
-
-    t.sleep(SIM_SPEED)
-
+simulation = SIMULATION()
+simulation.Run()
 p.disconnect()
 
 np.save('data/backLegSensorValues.npy', backLegSensorValues)
