@@ -86,4 +86,4 @@ np.save('data/backLegMotorValues.npy', backLegMotorValues)
 np.save('data/frontLegMotorValues', frontLegMotorValues)
 #print(backLegSensorValues)
 '''
-pass
+simulation = SIMULATION()
