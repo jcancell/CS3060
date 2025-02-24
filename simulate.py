@@ -33,7 +33,6 @@ frontLeg_targetAngles = [frontLeg_amplitude * np.sin(frontLeg_frequency * x + fr
 
 simulation = SIMULATION()
 simulation.Run()
-p.disconnect()
 
 np.save('data/backLegSensorValues.npy', backLegSensorValues)
 np.save('data/frontLegSensorValues.npy', frontLegSensorValues)
