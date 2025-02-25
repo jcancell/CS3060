@@ -11,10 +11,10 @@ class MOTOR:
         self.Prepare_To_Act()
 
     def Prepare_To_Act(self):
-        self.amplitude = c.backLeg_amplitude
-        self.frequency = c.backLeg_frequency
-        self.offset = c.backLeg_phaseOffset
-        
+        self.amplitude = c.AMPLITUDE
+        self.frequency = c.FEQUENCY
+        self.offset = c.OFFSET
+
         vals = np.linspace(0, 2 * np.pi, c.SIM_STEPS)
 
         self.motorValues = [self.amplitude * np.sin(self.frequency * x + self.offset)for x in vals]
@@ -27,4 +27,8 @@ class MOTOR:
             controlMode = p.POSITION_CONTROL,
             targetPosition = self.motorValues[x],
             maxForce = 50)
+        
+    def Save_Values(self):
+        np.save(f'data/{self.jointName}_MotorValues.npy', self.motorValues)
+    
 
