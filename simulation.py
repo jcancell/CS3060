@@ -18,6 +18,7 @@ class SIMULATION:
         
         pyrosim.Prepare_To_Simulate(self.robot.robotId)
         self.robot.Prepare_To_Sense()
+        self.robot.Prepare_To_Act()
 
     def __del__(self):
 
@@ -25,30 +26,9 @@ class SIMULATION:
 
     def Run(self):
         for x in range(c.SIM_STEPS):
-            #print(x)
             
             p.stepSimulation()
             self.robot.Sense(x)
+            self.robot.Act(x)
             
-            '''
-            # Back Leg Motor
-            pyrosim.Set_Motor_For_Joint(
-                bodyIndex = simulation.robot.robotId,
-                jointName = b'Torso_BackLeg',
-                controlMode = p.POSITION_CONTROL,
-                targetPosition = backLeg_targetAngles[x],
-                maxForce = 50)
-            
-            backLegMotorValues[x] = backLeg_targetAngles[x]
-
-            # Front Leg Motor
-            pyrosim.Set_Motor_For_Joint(
-                bodyIndex = simulation.robot.robotId,
-                jointName = b'Torso_FrontLeg',
-                controlMode = p.POSITION_CONTROL,
-                targetPosition = frontLeg_targetAngles[x],
-                maxForce = 50)
-            
-            frontLegMotorValues[x] = frontLeg_targetAngles[x]
-            '''
             t.sleep(c.SIM_SPEED)
