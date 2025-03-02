@@ -35,17 +35,13 @@ class ROBOT:
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
-
-                if isinstance(jointName, str):
-                    jointName = jointName.encode("utf-8")  
-
+                
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
 
-                if jointName in self.motors:
-                    self.motors[jointName].Set_Value(self.robotId, desiredAngle)
-                    print(neuronName, jointName, desiredAngle)
-                else:
-                    print(f"Warning: Joint {jointName} not found in self.motors!")
+                print(neuronName, jointName, desiredAngle)
+        
+        for motor in self.motors.values():
+            motor.Set_Value(self.robotId, x)
 
     def Think(self):
         self.nn.Update()
