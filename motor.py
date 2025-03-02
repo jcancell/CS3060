@@ -12,8 +12,14 @@ class MOTOR:
 
     def Prepare_To_Act(self):
         self.amplitude = c.AMPLITUDE
-        self.frequency = c.FEQUENCY
         self.offset = c.OFFSET
+
+        print(self.jointName)
+        
+        if self.jointName == b'Torso_FrontLeg':
+            self.frequency = c.FREQUENCY
+        else:
+            self.frequency = c.FREQUENCY / 2
 
         vals = np.linspace(0, 2 * np.pi, c.SIM_STEPS)
 
