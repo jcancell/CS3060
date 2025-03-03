@@ -8,14 +8,9 @@ class MOTOR:
         self.jointName = jointName
         self.values = np.zeros(c.SIM_STEPS)
 
-        self.Prepare_To_Act()
-
-    def Prepare_To_Act(self):
         self.amplitude = c.AMPLITUDE
         self.offset = c.OFFSET
 
-        print(self.jointName)
-        
         if self.jointName == b'Torso_FrontLeg':
             self.frequency = c.FREQUENCY
         else:
@@ -31,10 +26,7 @@ class MOTOR:
             bodyIndex = robotId,
             jointName = self.jointName,
             controlMode = p.POSITION_CONTROL,
-            targetPosition = self.motorValues[desiredAngle],
+            targetPosition = self.motorValues[int(desiredAngle)],
             maxForce = 50)
-        
-    def Save_Values(self):
-        np.save(f'data/{self.jointName}_MotorValues.npy', self.motorValues)
     
 
