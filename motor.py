@@ -26,7 +26,10 @@ class MOTOR:
             bodyIndex = robotId,
             jointName = self.jointName,
             controlMode = p.POSITION_CONTROL,
-            targetPosition = self.motorValues[int(desiredAngle)],
+            #targetPosition = self.motorValues[int(desiredAngle)],
+            
+            targetPosition = self.motorValues[int((desiredAngle + 1) / 2 * (len(self.motorValues) - 1))],
+            
             maxForce = 50)
     
 
