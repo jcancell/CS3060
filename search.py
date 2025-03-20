@@ -8,3 +8,4 @@ for i in range(5):
 '''
 
 hc = hillclimber.HILL_CLIMBER()
+hc.Evolve()
