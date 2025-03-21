@@ -45,7 +45,7 @@ class ROBOT:
 
     def Think(self):
         self.nn.Update()
-        self.nn.Print()
+        #self.nn.Print()
 
     def Get_Fitness(self):
         stateOfLinkZero = p.getLinkState(self.robotId,0)
@@ -54,9 +54,9 @@ class ROBOT:
 
         xCoordinateOfLinkZero = positionOfLinkZero[0]
 
-        print(stateOfLinkZero)
-        print(positionOfLinkZero)
-        print(xCoordinateOfLinkZero)
+        #print(stateOfLinkZero)
+        #print(positionOfLinkZero)
+        #print(xCoordinateOfLinkZero)
         #exit()
         
         file = open("fitness.txt", "w")
