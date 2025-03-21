@@ -35,3 +35,6 @@ class SIMULATION:
             self.robot.Act(x)
             
             t.sleep(c.SIM_SPEED)
+
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
