@@ -21,6 +21,9 @@ class SOLUTION:
 
     def Evaluate(self):
         os.system("py simulate.py")
+        fitnessFile = open("fitness.txt", "r")
+        self.fitness = fitnessFile.readline()
+        fitnessFile.close()
     
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")

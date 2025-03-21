@@ -6,3 +6,5 @@ SIM_SPEED = 1/500
 AMPLITUDE = np.pi/6
 FREQUENCY = 5
 OFFSET = 0.5
+
+numberOfGenerations = 2
