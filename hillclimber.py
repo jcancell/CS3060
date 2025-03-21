@@ -30,18 +30,10 @@ class HILL_CLIMBER:
     
     def Mutate(self):
         self.child.Mutate()
-        #print(self.parent.weights)
-        #print(self.child.weights)
-        #exit()
     
     def Select(self):
-        #print(self.parent.fitness)
-        #print(self.child.fitness)
-        
         if self.parent.fitness < self.child.fitness:
             self.parent = self.child
-        
-        #exit()
 
     def Print(self):
         print(self.parent.fitness, self.child.fitness)

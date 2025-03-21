@@ -9,7 +9,7 @@ import time as t
 class SIMULATION:
 
     def __init__(self):
-        self.physicsClient = p.connect(p.GUI)
+        self.physicsClient = p.connect(p.DIRECT)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,-9.8)
         
@@ -34,7 +34,7 @@ class SIMULATION:
 
             self.robot.Act(x)
             
-            t.sleep(c.SIM_SPEED)
+            #t.sleep(c.SIM_SPEED)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()

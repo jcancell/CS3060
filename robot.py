@@ -34,7 +34,7 @@ class ROBOT:
     def Act(self, x):
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
-                #jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
+                
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName).encode("utf-8")
 
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
@@ -45,7 +45,6 @@ class ROBOT:
 
     def Think(self):
         self.nn.Update()
-        #self.nn.Print()
 
     def Get_Fitness(self):
         stateOfLinkZero = p.getLinkState(self.robotId,0)
@@ -53,13 +52,7 @@ class ROBOT:
         positionOfLinkZero = stateOfLinkZero[0]
 
         xCoordinateOfLinkZero = positionOfLinkZero[0]
-
-        #print(stateOfLinkZero)
-        #print(positionOfLinkZero)
-        #print(xCoordinateOfLinkZero)
-        #exit()
         
         file = open("fitness.txt", "w")
         file.write(str(xCoordinateOfLinkZero))
         file.close()
-        #TODO no difference between simulations

@@ -7,4 +7,4 @@ AMPLITUDE = np.pi/6
 FREQUENCY = 5
 OFFSET = 0.5
 
-numberOfGenerations = 2
+numberOfGenerations = 10

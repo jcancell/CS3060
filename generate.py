@@ -10,9 +10,6 @@ def Create_World():
 
     pyrosim.End()
 
-def Create_Robot():
-    pass
-
 def Generate_Body():
     pyrosim.Start_URDF("body.urdf")
 
@@ -38,16 +35,6 @@ def Generate_Brain():
     pyrosim.Send_Motor_Neuron( name = 3 , jointName = "Torso_BackLeg")
     pyrosim.Send_Motor_Neuron(name = 4, jointName="Torso_FrontLeg")
 
-    #weight1, weight2, weight3, weight4 = 0.5, 0.5, 0.5, 0.1
-
-    #pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 3 , weight = weight1 )
-
-    #pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 3 , weight = weight2 )
-
-    #pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 4 , weight = weight3 )
-
-    #pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 4 , weight = weight4 )
-
     for i in range(3):
         for j in range(3, 5):
             pyrosim.Send_Synapse(sourceNeuronName=i, targetNeuronName=j, weight = random.uniform(-1.0, 1.0))
@@ -56,6 +43,5 @@ def Generate_Brain():
     pyrosim.End()
 
 Create_World()
-# Create_Robot()
 Generate_Body()
 Generate_Brain()
