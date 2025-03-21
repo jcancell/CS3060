@@ -21,6 +21,8 @@ class HILL_CLIMBER:
 
         self.child.Evaluate()
 
+        self.Print()
+
         self.Select()
 
     def Spawn(self):
@@ -33,4 +35,13 @@ class HILL_CLIMBER:
         #exit()
     
     def Select(self):
-        pass
+        #print(self.parent.fitness)
+        #print(self.child.fitness)
+        
+        if self.parent.fitness < self.child.fitness:
+            self.parent = self.child
+        
+        #exit()
+
+    def Print(self):
+        print(self.parent.fitness, self.child.fitness)

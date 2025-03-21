@@ -62,3 +62,4 @@ class ROBOT:
         file = open("fitness.txt", "w")
         file.write(str(xCoordinateOfLinkZero))
         file.close()
+        #TODO no difference between simulations
