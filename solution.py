@@ -7,7 +7,9 @@ length, width, height = 1, 1, 1
 
 class SOLUTION:
 
-    def __init__(self):
+    def __init__(self, nextAvailableID):
+        self.myID = nextAvailableID
+        
         self.weights = np.random.rand(3, 2)
         
         self.weights = self.weights * 2 - 1
@@ -18,6 +20,9 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
+
+    def Set_ID(self, ID):
+        self.myID = ID
 
     def Evaluate(self, mode="DIRECT"):
         #os.system(f"py simulate.py {mode}")
