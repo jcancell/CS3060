@@ -9,7 +9,9 @@ class HILL_CLIMBER:
         self.parent = solution.SOLUTION()
 
     def Evolve(self):
-        self.parent.Evaluate()
+        self.parent.Evaluate(mode="GUI")
+
+        print("Initial Parent Fitness: " + self.parent.fitness)
 
         for currentGeneration in range(constraints.numberOfGenerations):
             self.Evolve_For_One_Generation()
@@ -24,6 +26,9 @@ class HILL_CLIMBER:
         self.Print()
 
         self.Select()
+
+    def Show_Best(self):
+        self.parent.Evaluate(mode="GUI")
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)

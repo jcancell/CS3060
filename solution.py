@@ -19,8 +19,8 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
 
-    def Evaluate(self):
-        os.system("py simulate.py")
+    def Evaluate(self, mode="DIRECT"):
+        os.system(f"py simulate.py {mode}")
         fitnessFile = open("fitness.txt", "r")
         self.fitness = fitnessFile.readline()
         fitnessFile.close()
