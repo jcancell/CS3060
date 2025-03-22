@@ -1,0 +1,6 @@
+__pycache__
+body.urdf
+brain.nndf
+world.sdf
+fitness.txt
+data
