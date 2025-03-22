@@ -8,3 +8,5 @@ FREQUENCY = 5
 OFFSET = 0.5
 
 numberOfGenerations = 10
+
+populationSize = 2
