@@ -26,7 +26,7 @@ class SOLUTION:
 
     def Evaluate(self, mode="DIRECT"):
         #os.system(f"py simulate.py {mode}")
-        os.system("start /B py simulate.py " + mode )
+        os.system("start /B py simulate.py " + mode + " " + str(self.myID))
         fitnessFile = open("fitness.txt", "r")
         self.fitness = fitnessFile.readline()
         fitnessFile.close()
@@ -54,7 +54,7 @@ class SOLUTION:
         pyrosim.End()
     
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
 
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1, linkName="BackLeg")
