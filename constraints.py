@@ -9,4 +9,4 @@ OFFSET = 0.5
 
 numberOfGenerations = 10
 
-populationSize = 2
+populationSize = 10

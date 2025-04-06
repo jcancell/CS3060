@@ -12,10 +12,14 @@ import os
 class ROBOT:
 
     def __init__(self, solutionID):
-
+        self.solutionID = solutionID
         self.robotId = p.loadURDF("body.urdf")
-        self.motors = {}
+        
+        pyrosim.Prepare_To_Simulate(self.robotId)
         self.nn = NEURAL_NETWORK(f"brain{solutionID}.nndf")
+
+        self.Prepare_To_Sense()
+        self.Prepare_To_Act()
 
         os.system(f"del brain{solutionID}.nndf")
 
@@ -38,25 +42,27 @@ class ROBOT:
     def Act(self, x):
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
-                
-                jointName = self.nn.Get_Motor_Neurons_Joint(neuronName).encode("utf-8")
+                jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)#.encode("utf-8")
 
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
 
                 self.motors[jointName].Set_Value(self.robotId, desiredAngle)
 
-                jointName = jointName.decode("utf-8")
+                #jointName = jointName.decode("utf-8")
 
     def Think(self):
         self.nn.Update()
 
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robotId,0)
+        self.stateOfLinkZero = p.getLinkState(self.robotId,0)
 
-        positionOfLinkZero = stateOfLinkZero[0]
+        self.positionOfLinkZero = self.stateOfLinkZero[0]
 
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        self.xCoordinateOfLinkZero = self.positionOfLinkZero[0]
         
-        file = open("fitness.txt", "w")
-        file.write(str(xCoordinateOfLinkZero))
-        file.close()
+        fitness_filename = f"fitness{self.solutionID}.txt"
+        with open(fitness_filename, "w") as file:
+            file.write(str(self.xCoordinateOfLinkZero))
+            file.close()
+
+        os.system(f'rename tmp{self.solutionID}.txt fitness{self.solutionID}.txt')

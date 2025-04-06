@@ -1,50 +1,49 @@
 import solution
 import constraints
 import copy
+import time
+import os
 
 class PARALLEL_HILL_CLIMBER:
 
     def __init__(self):
+        os.system('del -f brain*.nndf')
+        os.system('del -f fitness*.txt')
+        
         self.nextAvailableID = 0
         
         self.parents = {}
-        for i in range(0,constraints.populationSize):
+        for i in range(constraints.populationSize):
             self.parents[i] = solution.SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
-        #print(self.parents)
-        '''
-        self.parent = solution.SOLUTION()
-        '''
+    def Evaluate(self, solutions):
+        for solution in solutions.values():
+            solution.Evaluate('DIRECT')
 
     def Evolve(self):
-        for i in range(len(self.parents)):
-            self.parents[i].Evaluate(mode="GUI")
-            print(f"Parent {i} Fitness: {self.parents[i].fitness}")
-        '''
-        self.parent.Evaluate(mode="GUI")
+        self.Evaluate(self.parents)
 
-        print("Initial Parent Fitness: " + self.parent.fitness)
-
-        for currentGeneration in range(constraints.numberOfGenerations):
+        for gen in range(constraints.numberOfGenerations):
             self.Evolve_For_One_Generation()
-        '''
+            print(f'\rGeneration {gen+1} / {constraints.numberOfGenerations}')
+        print()   
+
     def Evolve_For_One_Generation(self):
-        self.Spawn()
+        self.children = {}
+        for key, parent in self.parents.items():
+            child = copy.deepcopy(parent)
+            child.Set_ID(self.nextAvailableID)
+            self.nextAvailableID += 1
+            self.children[key] = child
 
         self.Mutate()
 
-        self.child.Evaluate()
-
-        self.Print()
+        self.Evaluate(self.children)
 
         self.Select()
 
-    def Show_Best(self):
-        pass
-        '''
-        self.parent.Evaluate(mode="GUI")
-        '''
+        self.Print()
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
@@ -52,11 +51,25 @@ class PARALLEL_HILL_CLIMBER:
         self.nextAvailableID += 1
     
     def Mutate(self):
-        self.child.Mutate()
+        for child in self.children.values():
+            child.Mutate()
     
     def Select(self):
-        if self.parent.fitness < self.child.fitness:
-            self.parent = self.child
+        for key in self.parents:
+            if self.parents[key].fitness > self.children[key].fitness:
+                self.parents[key] = self.children[key]
 
     def Print(self):
-        print("\n"+self.parent.fitness, self.child.fitness)
+        print()
+        for key in self.parents:
+            parent_fitness = self.parents[key].fitness
+
+            child_fitness = self.children[key].fitness if key in self.children else "N/A"
+
+            print(f"Parent {key}: {parent_fitness} Child {key}: {child_fitness}")
+        print()
+
+    def Show_Best(self):
+        best = min(self.parents.values(), key=lambda sol: sol.fitness)
+
+        best.Start_Simulation("GUI")

@@ -4,3 +4,4 @@ brain.nndf
 world.sdf
 fitness.txt
 data
+fitness*.txt

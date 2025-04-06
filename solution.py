@@ -2,6 +2,7 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 import random
 import os
+import time
 
 length, width, height = 1, 1, 1
 
@@ -17,19 +18,30 @@ class SOLUTION:
         #print(self.weights)
         #exit()
 
+    def Evaluate(self, mode="DIRECT"):
+        self.Start_Simulation(mode)
+        self.Wait_For_Simulation_To_End()
+
+    def Start_Simulation(self, mode='DIRECT'):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
 
-    def Set_ID(self, ID):
-        self.myID = ID
+        os.system("py simulate.py " + mode + " " + str(self.myID))
 
-    def Evaluate(self, mode="DIRECT"):
-        #os.system(f"py simulate.py {mode}")
-        os.system("start /B py simulate.py " + mode + " " + str(self.myID))
-        fitnessFile = open("fitness.txt", "r")
-        self.fitness = fitnessFile.readline()
-        fitnessFile.close()
+    def Wait_For_Simulation_To_End(self):
+        fitnessFileName = "fitness" + str(self.myID) + ".txt"
+        #print(fitnessFileName)
+        while not os.path.exists(fitnessFileName):
+            #print(fitnessFileName)
+            time.sleep(1.01)
+        
+        with open(fitnessFileName, 'r') as file:
+            self.fitness = file.read()
+            self.fitness = float(self.fitness)
+            file.close()
+
+        os.system(f'del {fitnessFileName}')
     
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
@@ -76,4 +88,7 @@ class SOLUTION:
 
         self.weights[randomRow, randomColumn] = random.random() * 2 - 1
 
-        self.Create_Brain()
+        #self.Create_Brain()
+
+    def Set_ID(self, ID):
+        self.myID = ID
