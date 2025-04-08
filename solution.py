@@ -35,7 +35,7 @@ class SOLUTION:
         #print(fitnessFileName)
         while not os.path.exists(fitnessFileName):
             #print(fitnessFileName)
-            time.sleep(1.01)
+            time.sleep(0.01)
         
         with open(fitnessFileName, 'r') as file:
             self.fitness = file.read()

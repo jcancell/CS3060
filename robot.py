@@ -63,10 +63,24 @@ class ROBOT:
 
         #self.xCoordinateOfLinkZero = self.positionOfLinkZero[0]
         self.xPosition = self.basePosition[0]
+        self.yPosition = self.basePosition[1]
+        self.zPosition = self.basePosition[2]
+
+        #print(self.basePositionAndOrientation)
+        #print(self.basePosition)
+        #print(self.xPosition)
+        fitnessVal = 0.01
+        #fitnessVal = self.xPosition
+        
+        if self.zPosition < 2:
+            fitnessVal = 10
+        else:
+            fitnessVal = self.xPosition
+        
         
         fitness_filename = f"tmp{self.solutionID}.txt"
         with open(fitness_filename, "w") as file:
-            file.write(str(self.xPosition))
+            file.write(str(fitnessVal))
             file.close()
 
         os.system(f'rename tmp{self.solutionID}.txt fitness{self.solutionID}.txt')
