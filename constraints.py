@@ -1,7 +1,7 @@
 import numpy as np
 
-SIM_STEPS = 1000
-SIM_SPEED = 1/250
+SIM_STEPS = 2500
+SIM_SPEED = 1/500
 
 AMPLITUDE = np.pi/6
 FREQUENCY = 5

@@ -64,7 +64,7 @@ class ROBOT:
         #self.xCoordinateOfLinkZero = self.positionOfLinkZero[0]
         self.xPosition = self.basePosition[0]
         
-        fitness_filename = f"fitness{self.solutionID}.txt"
+        fitness_filename = f"tmp{self.solutionID}.txt"
         with open(fitness_filename, "w") as file:
             file.write(str(self.xPosition))
             file.close()
