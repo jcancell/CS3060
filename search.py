@@ -20,5 +20,10 @@ phc = parallelHillClimber.PARALLEL_HILL_CLIMBER()
 phc.Evolve()
 phc.Show_Best()
 
-#data = np.load('fitness_matrix.npy')
-#print(data)
+data = np.load('fitness_matrix_A.npy')
+print("Matrix A")
+print(data)
+
+data = np.load('fitness_matrix_B.npy')
+print("Matrix B")
+print(data)
