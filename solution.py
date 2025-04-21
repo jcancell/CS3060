@@ -57,16 +57,14 @@ class SOLUTION:
         exp_version = os.environ.get('VERSION')
 
         if exp_version == 'A':
-            print("Version A")
-            mass_torso = 4.5
-            mass_upper_leg = 0.5
-            mass_lower_leg = 1.0
-            # Total Mass = 10.5
+            mass_torso = 10.0
+            mass_upper_leg = 0.4
+            mass_lower_leg = 0.4
+            # Total Mass = 6.6
         else:
-            print("Version B")
-            mass_torso = 0.5
-            mass_upper_leg = 1.0
-            mass_lower_leg = 1.5
+            mass_torso = 5
+            mass_upper_leg = 0.8
+            mass_lower_leg = 0.8
             # Total Mass = 10.5
 
         pyrosim.Send_Cube(name="Torso", pos=[0, 0, 4], size=[length, width, height],mass=mass_torso)

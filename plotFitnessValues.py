@@ -16,24 +16,22 @@ print("")
 #plt.show()
 
 # Plot both A and B rows on the same plot
-plt.figure(figsize=(12, 6))
+# Convert any sentinel values (e.g., 10) to NaN so they are ignored in averaging
+data_A = np.where(data_A == 10000, np.nan, data_A)
+data_B = np.where(data_B == 10000, np.nan, data_B)
 
-# Plot each row from Matrix A
-for i in range(data_A.shape[0]):
-    y = data_A[i, :].copy()
-    y[y == 10] = np.nan  # Replace 10s with NaN to prevent plotting
-    plt.plot(y, label=f'A Gen {i}', linestyle='-', marker='o')
+# Compute average fitness per generation (i.e., column-wise mean)
+avg_fitness_A = np.nanmean(data_A, axis=0)
+avg_fitness_B = np.nanmean(data_B, axis=0)
 
-# Plot each row from Matrix B
-for i in range(data_B.shape[0]):
-    y = data_B[i, :].copy()
-    y[y == 10] = np.nan
-    plt.plot(y, label=f'B Gen {i}', linestyle='--',marker='x')
-
-plt.title('Fitness Curves: Variant A and B')
+# Plot
+plt.figure(figsize=(10, 5))
+plt.plot(avg_fitness_A, label='Variant A', marker='o')
+plt.plot(avg_fitness_B, label='Variant B', marker='o', linestyle='--')
+plt.title('Average Fitness Over Generations')
 plt.xlabel('Generation')
-plt.ylabel('Fitness')
-plt.legend(loc='best', fontsize='small')
+plt.ylabel('Average Fitness')
+plt.legend()
 plt.grid(True)
 plt.gca().invert_yaxis()
 plt.tight_layout()

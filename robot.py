@@ -72,8 +72,8 @@ class ROBOT:
         fitnessVal = 0.01
         #fitnessVal = self.xPosition
         
-        if self.zPosition < 2:
-            fitnessVal = 10.0
+        if self.zPosition < 2.5:
+            fitnessVal = 10000
         else:
             fitnessVal = self.xPosition
         
