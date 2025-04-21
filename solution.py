@@ -58,14 +58,23 @@ class SOLUTION:
 
         if exp_version == 'A':
             mass_torso = 10.0
-            mass_upper_leg = 0.4
-            mass_lower_leg = 0.4
-            # Total Mass = 6.6
+            mass_upper_leg = 0.25
+            mass_lower_leg = 0.5
+
+        if exp_version == 'B':
+            mass_torso = 5.0
+            mass_upper_leg = 0.25
+            mass_lower_leg = 0.5
+
+        if exp_version == 'C':
+            mass_torso = 10.0
+            mass_upper_leg = 0.125
+            mass_lower_leg = 0.25
+
         else:
-            mass_torso = 5
-            mass_upper_leg = 0.8
-            mass_lower_leg = 0.8
-            # Total Mass = 10.5
+            mass_torso = 5.0
+            mass_upper_leg = 0.125
+            mass_lower_leg = 0.25
 
         pyrosim.Send_Cube(name="Torso", pos=[0, 0, 4], size=[length, width, height],mass=mass_torso)
 

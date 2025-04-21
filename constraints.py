@@ -7,9 +7,9 @@ AMPLITUDE = np.pi/6
 FREQUENCY = 5
 OFFSET = 0.5
 
-numberOfGenerations = 50
+numberOfGenerations = 5
 
-populationSize = 2
+populationSize = 5
 
 numSensorNeurons = 4
 numMotorNeurons = 8
