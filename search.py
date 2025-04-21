@@ -12,7 +12,7 @@ if len(sys.argv) != 2 or sys.argv[1] not in ['A', 'B']:
     exit(1)
 
 experiment = sys.argv[1]
-os.environ['EXPERIMENT_VERSION'] = experiment  # Pass it as an environment variable
+os.environ['VERSION'] = experiment  # Pass it as an environment variable
 
 
 phc = parallelHillClimber.PARALLEL_HILL_CLIMBER()
