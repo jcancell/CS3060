@@ -7,8 +7,6 @@ import constraints
 
 length, width, height = 1, 1, 1
 
-exp_version = os.environ.get('VERSION')
-
 class SOLUTION:
 
     def __init__(self, nextAvailableID):
@@ -55,6 +53,8 @@ class SOLUTION:
     
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
+
+        exp_version = os.environ.get('VERSION')
 
         if exp_version == 'A':
             print("Version A")

@@ -2,6 +2,7 @@ import os
 import hillclimber
 import parallelHillClimber
 import sys
+import numpy as np
 
 #hc = hillclimber.HILL_CLIMBER()
 #hc.Evolve()
@@ -18,3 +19,6 @@ os.environ['VERSION'] = experiment  # Pass it as an environment variable
 phc = parallelHillClimber.PARALLEL_HILL_CLIMBER()
 phc.Evolve()
 phc.Show_Best()
+
+#data = np.load('fitness_matrix.npy')
+#print(data)

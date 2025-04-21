@@ -3,12 +3,15 @@ import constraints
 import copy
 import time
 import os
+import numpy as np
 
 class PARALLEL_HILL_CLIMBER:
 
     def __init__(self):
         os.system('del -f brain*.nndf')
         os.system('del -f fitness*.txt')
+
+        self.matrix_fit = np.zeros((constraints.populationSize, constraints.numberOfGenerations))
         
         self.nextAvailableID = 0
         
@@ -17,19 +20,29 @@ class PARALLEL_HILL_CLIMBER:
             self.parents[i] = solution.SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
-    def Evaluate(self, solutions):
-        for solution in solutions.values():
+    def Evaluate(self, solutions, generation=None):
+        for key, solution in solutions.items():
             solution.Evaluate('DIRECT')
+            
+            if generation is not None:
+                self.matrix_fit[key, generation] = solution.fitness
+        
+        '''for solution in solutions.values():
+            solution.Evaluate('DIRECT')'''
 
     def Evolve(self):
-        self.Evaluate(self.parents)
+        self.Evaluate(self.parents, generation = 0)
 
-        for gen in range(constraints.numberOfGenerations):
-            self.Evolve_For_One_Generation()
+        for gen in range(1, constraints.numberOfGenerations):
+            self.Evolve_For_One_Generation(gen)
             print(f'\rGeneration {gen+1} / {constraints.numberOfGenerations}')
         print()   
 
-    def Evolve_For_One_Generation(self):
+        version = os.environ.get('VERSION')
+
+        np.save(f"fitness_matrix_{version}.npy", self.matrix_fit)
+
+    def Evolve_For_One_Generation(self, generation):
         self.children = {}
         for key, parent in self.parents.items():
             child = copy.deepcopy(parent)
@@ -39,7 +52,7 @@ class PARALLEL_HILL_CLIMBER:
 
         self.Mutate()
 
-        self.Evaluate(self.children)
+        self.Evaluate(self.children, generation)
 
         self.Select()
 
